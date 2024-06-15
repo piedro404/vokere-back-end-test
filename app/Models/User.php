@@ -48,11 +48,23 @@ class User extends Authenticatable
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, 'user_permissions');
+        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id')->withTimestamps();
     }
 
     public function address()
     {
         return $this->hasOne(Address::class, 'user_id', 'id');
+    }
+
+    public function assignPermission(string $permission): void
+    {
+        $permission = Permission::firstOrCreate(['name' => $permission]);
+
+        $this->permissions()->syncWithoutDetaching([$permission->id]);
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        return $this->permissions()->where('name', $permission)->exists();
     }
 }
