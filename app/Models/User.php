@@ -67,4 +67,14 @@ class User extends Authenticatable
     {
         return $this->permissions()->where('name', $permission)->exists();
     }
+
+    // Funções do Controllers
+    
+    public function getUsersClients() {
+        $clients = $this::whereHas('permissions', function ($query) {
+            $query->where('name', 'client');
+        })->get();
+
+        return $clients;
+    }
 }

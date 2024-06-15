@@ -42,24 +42,26 @@
                         </thead>
 
                         <tbody class="divide-y divide-gray-200">
-                            <tr>
-                                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">1</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">Ana Karen</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-                                <td class="whitespace-nowrap px-4 py-2">
-                                    <a href="#"
-                                        class="inline-block rounded bg-blue-600 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
-                                        Editar
-                                    </a>
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-2">
-                                    <a href="#"
-                                        class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">
-                                        Excluir
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach ($clients as $client)
+                                <tr>
+                                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $client->id }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $client->name }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $client->formated_date_of_birth }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $client->formated_created_at }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2">
+                                        <a href="#"
+                                            class="inline-block rounded bg-blue-600 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
+                                            Editar
+                                        </a>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2">
+                                        <a href="#"
+                                            class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">
+                                            Excluir
+                                        </a>    
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
