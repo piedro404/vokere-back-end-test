@@ -106,10 +106,24 @@
 
                             <div>
                                 <button
-                                    class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                                    Book Appointment
+                                    class="hover:shadow-form w-full rounded-md bg-green-500 hover:bg-green-700 py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                    Registar
                                 </button>
                             </div>
+
+                            <script type="module">
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    Inputmask("999.999.999-99").mask(document.getElementById('cpf'));
+                                });
+
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    Inputmask("99999-999").mask(document.getElementById('cep'));
+                                });
+
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    Inputmask("AA").mask(document.getElementById('state'));
+                                });
+                            </script>
                         </form>
                     </div>
                 </div>
