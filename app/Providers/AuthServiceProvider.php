@@ -30,11 +30,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manager', function (User $user) {
-            return $user->permissions->contains('name', 'manager');
+            return $user->permissions->contains('name', 'manager') || $user->permissions->contains('name', 'admin');
         });
 
         Gate::define('client', function (User $user) {
-            return $user->permissions->contains('name', 'client');
+            return $user->permissions->contains('name', 'client') || $user->permissions->contains('name', 'manager') || $user->permissions->contains('name', 'admin');
         });
 
     }
