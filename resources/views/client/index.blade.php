@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-3">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h1 class="text-lg">Lista de Clientes</h1>
+                    <h1 class="text-lg">Lista de Clientes - Exibindo {{ $clients->count() }}</h1>
                 </div>
             </div>
 
@@ -37,28 +37,36 @@
                                 </th>
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Data de Cadastro</th>
                                 <th class="px-4 py-2"></th>
-                                <th class="px-4 py-2"></th>
+                                <th class="px-4 py-2 flex justify-center">
+                                    <a href="{{ route('client.create') }}"
+                                        class="inline-block rounded bg-green-600 px-3 py-2 text-xs font-medium text-white hover:bg-green-700">
+                                        +
+                                    </a>
+                                </th>
                             </tr>
                         </thead>
 
                         <tbody class="divide-y divide-gray-200">
                             @foreach ($clients as $client)
                                 <tr>
-                                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $client->id }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                        {{ $client->id }}</td>
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $client->name }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $client->formated_date_of_birth }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $client->formated_created_at }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        {{ $client->formated_date_of_birth }}</td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        {{ $client->formated_created_at }}</td>
                                     <td class="whitespace-nowrap px-4 py-2">
                                         <a href="#"
                                             class="inline-block rounded bg-blue-600 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
                                             Editar
                                         </a>
                                     </td>
-                                    <td class="whitespace-nowrap px-4 py-2">
+                                    <td class="whitespace-nowrap px-4 py-2 flex justify-center">
                                         <a href="#"
                                             class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">
                                             Excluir
-                                        </a>    
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -28,6 +28,11 @@ class ClientController extends Controller
         return view('client.index', compact('clients'));
     }
 
+    public function create()
+    {
+        return view('client.create');
+    }
+
     // Funcao de Formatação
 
     private function formatedDate($date)

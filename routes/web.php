@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
 
 Route::prefix('/clients')->middleware(['auth', 'can:manager'])->group(function () {
     Route::get('/', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/create', [ClientController::class, 'create'])->name('client.create');
 });
 
 
