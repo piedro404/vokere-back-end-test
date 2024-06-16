@@ -63,10 +63,14 @@
                                         </a>
                                     </td>
                                     <td class="whitespace-nowrap px-4 py-2 flex justify-center">
-                                        <a href="#"
-                                            class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">
-                                            Excluir
-                                        </a>
+                                        <form action="{{ route('client.delete', ['id' => $client->id]) }}" method="post">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button type="submit"
+                                                class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">
+                                                Excluir
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

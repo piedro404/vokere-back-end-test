@@ -41,18 +41,27 @@ class ClientController extends Controller
         $client = $request->only('name', 'email', 'date_of_birth', 'cpf');
         $address = $request->only('street', 'number', 'complement', 'neighborhood', 'cep', 'city', 'state');
         $client['password'] = bcrypt($request->password);
-        
+
         // dd($client, $address);
 
         if ($request->avatar) {
             $extension = $request->avatar->getClientOriginalExtension();
-            $client['avatar'] = $request->avatar->storeAs('usersAvatar', "{$client['name']}_". now() . ".{$extension}");
+            $client['avatar'] = $request->avatar->storeAs('usersAvatar', "{$client['name']}_" . now() . ".{$extension}");
         }
 
         $user = $this->user->create($client);
         $user->assignPermission('client');
         $address['user_id'] = $user->id;
         $this->address->create($address);
+
+        return redirect()->route('client.index');
+    }
+
+    public function delete($id)
+    {
+        if ($client = $this->user->find($id)) {
+            $client->delete();
+        }
 
         return redirect()->route('client.index');
     }
