@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUpdateUserFormRequest;
 use App\Models\{Address, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -23,8 +24,8 @@ class ClientController extends Controller
         $clients = $this->user->getUsersClients();
 
         $clients->transform(function ($client) {
-            $client->formated_date_of_birth = $this->formatedDate($client->date_of_birth);
-            $client->formated_created_at = $this->formatedTimestamp($client->created_at);
+            $client->formatted_date_of_birth = $this->formatedDate($client->date_of_birth);
+            $client->formatted_created_at = $this->formatedTimestamp($client->created_at);
             return $client;
         });
 
@@ -60,6 +61,9 @@ class ClientController extends Controller
     public function delete($id)
     {
         if ($client = $this->user->find($id)) {
+            if ($client->avatar) {
+                Storage::delete($client->avatar);
+            }
             $client->delete();
         }
 
