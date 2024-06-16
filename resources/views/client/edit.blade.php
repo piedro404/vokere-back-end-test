@@ -19,7 +19,7 @@
                             <div>
                                 <button type="submit"
                                     class="hover:shadow-form w-full rounded-md bg-blue-500 hover:bg-blue-700 py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                                    Editar
+                                    Atualizar 
                                 </button>
                             </div>
                         </form>

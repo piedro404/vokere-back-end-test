@@ -27,7 +27,8 @@ class StoreUpdateUserFormRequest extends FormRequest
         $this->merge([
             'cpf' => preg_replace('/[\.\-_]/', '', $this->cpf),
             'cep' => preg_replace('/[\.\-_]/', '', $this->cep),
-            'state' => preg_replace('/[\.\-_]/', '', $this->state),
+            'state' => strtoupper(preg_replace('/[\.\-_]/', '', $this->state)),
+            'number' => strtoupper($this->number),
             'date_of_birth' => Carbon::createFromFormat('d/m/Y', $this->date_of_birth)->format('Y-m-d'),
         ]);
 

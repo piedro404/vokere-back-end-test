@@ -45,7 +45,9 @@ class ClientController extends Controller
         $client->formatted_date_of_birth = $this->formattedDate($client->date_of_birth);
         $client->formatted_created_at = $this->formattedTimestamp($client->created_at);
         $client->formatted_cpf = $this->formattedCPF($client->cpf);
-        $location->formatted_cep = $this->formattedCEP($location->cep);
+        if($location){
+            $location->formatted_cep = $this->formattedCEP($location->cep);
+        }
         // dd($location);
 
         return view('client.show', compact('client', 'location'));
