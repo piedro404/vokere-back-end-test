@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Requests\StoreUpdateUserFormRequest;
+use App\Models\{Address, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    private $model;
+    private $user;
+    private $address;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Address $address)
     {
-        $this->model = $user;
+        $this->user = $user;
+        $this->address = $address;
     }
 
     public function index()
     {
-        $clients = $this->model->getUsersClients();
+        $clients = $this->user->getUsersClients();
 
         $clients->transform(function ($client) {
             $client->formated_date_of_birth = $this->formatedDate($client->date_of_birth);
@@ -31,6 +34,16 @@ class ClientController extends Controller
     public function create()
     {
         return view('client.create');
+    }
+
+    public function store(StoreUpdateUserFormRequest $request)
+    {
+        $client = $request->only('name', 'email', 'password', 'date_of_birth', 'cpf', 'avatar');
+        $address = $request->only('street', 'number', 'complement', 'neighborhood', 'cep', 'city', 'state');
+        
+        dd($client, $address);
+
+        return redirect()->route('client.index');
     }
 
     // Funcao de Formatação
