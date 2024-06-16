@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUpdateUserFormRequest extends FormRequest
@@ -27,6 +28,7 @@ class StoreUpdateUserFormRequest extends FormRequest
             'cpf' => preg_replace('/[\.\-_]/', '', $this->cpf),
             'cep' => preg_replace('/[\.\-_]/', '', $this->cep),
             'state' => preg_replace('/[\.\-_]/', '', $this->state),
+            'date_of_birth' => Carbon::createFromFormat('d/m/Y', $this->date_of_birth)->format('Y-m-d'),
         ]);
 
         $rules = [

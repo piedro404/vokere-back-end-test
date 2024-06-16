@@ -20,7 +20,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('client.store') }}" method="POST" id="formRegisterClient">
+                        <form action="{{ route('client.store') }}" method="POST" id="formRegisterClient" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-6">
                                 <label for="avatar"
@@ -82,7 +82,7 @@
                                             class="mb-3 block text-base font-medium text-[#07074D]">
                                             Data de Aniversario
                                         </label>
-                                        <input type="date" name="date_of_birth" id="date_of_birth" required
+                                        <input type="text" name="date_of_birth" id="date_of_birth" required placeholder="dd/mm/yyyy"
                                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                     </div>
                                 </div>
@@ -168,6 +168,7 @@
                                     Inputmask("999.999.999-99").mask(document.getElementById('cpf'));
                                     Inputmask("99999-999").mask(document.getElementById('cep'));
                                     Inputmask("AA").mask(document.getElementById('state'));
+                                    Inputmask("99/99/9999").mask(document.getElementById('date_of_birth'));
                                 });
                             </script>
 
