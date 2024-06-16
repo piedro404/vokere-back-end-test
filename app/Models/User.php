@@ -56,6 +56,18 @@ class User extends Authenticatable
         return $this->hasOne(Address::class, 'user_id', 'id');
     }
 
+    public function assignAddress(array $location, $id)
+    {
+        $address = Address::where('user_id', $id)->first();
+
+        if (!$address) {
+            $location['user_id'] = $id;
+            Address::create($location);
+        } else {
+            $address->update($location);
+        }
+    }
+
     public function assignPermission(string $permission): void
     {
         $permission = Permission::firstOrCreate(['name' => $permission]);
@@ -69,8 +81,9 @@ class User extends Authenticatable
     }
 
     // Funções do Controllers
-    
-    public function getUsersClients() {
+
+    public function getUsersClients()
+    {
         $clients = $this::whereHas('permissions', function ($query) {
             $query->where('name', 'client');
         })->get();

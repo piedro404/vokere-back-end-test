@@ -24,12 +24,31 @@ class ClientController extends Controller
         $clients = $this->user->getUsersClients();
 
         $clients->transform(function ($client) {
-            $client->formatted_date_of_birth = $this->formatedDate($client->date_of_birth);
-            $client->formatted_created_at = $this->formatedTimestamp($client->created_at);
+            $client->formatted_date_of_birth = $this->formattedDate($client->date_of_birth);
+            $client->formatted_created_at = $this->formattedTimestamp($client->created_at);
             return $client;
         });
 
         return view('client.index', compact('clients'));
+    }
+
+    public function show($id)
+    {
+        if (!$client = $this->user->find($id)) {
+            return redirect()->route('client.index');
+        }
+        if (!$client->hasPermission('client')) {
+            return redirect()->route('client.index')->with('error', 'Você so podê visualizar Clientes.');
+        }
+
+        $location = $client->address()->first();
+        $client->formatted_date_of_birth = $this->formattedDate($client->date_of_birth);
+        $client->formatted_created_at = $this->formattedTimestamp($client->created_at);
+        $client->formatted_cpf = $this->formattedCPF($client->cpf);
+        $location->formatted_cep = $this->formattedCEP($location->cep);
+        // dd($location);
+
+        return view('client.show', compact('client', 'location'));
     }
 
     public function create()
@@ -40,10 +59,10 @@ class ClientController extends Controller
     public function store(StoreUpdateUserFormRequest $request)
     {
         $client = $request->only('name', 'email', 'date_of_birth', 'cpf');
-        $address = $request->only('street', 'number', 'complement', 'neighborhood', 'cep', 'city', 'state');
+        $location = $request->only('street', 'number', 'complement', 'neighborhood', 'cep', 'city', 'state');
         $client['password'] = bcrypt($request->password);
 
-        // dd($client, $address);
+        // dd($client, $location);
 
         if ($request->avatar) {
             $extension = $request->avatar->getClientOriginalExtension();
@@ -52,8 +71,52 @@ class ClientController extends Controller
 
         $user = $this->user->create($client);
         $user->assignPermission('client');
-        $address['user_id'] = $user->id;
-        $this->address->create($address);
+        $location['user_id'] = $user->id;
+        $this->address->create($location);
+
+        return redirect()->route('client.index');
+    }
+
+    public function edit($id)
+    {
+        if (!$client = $this->user->find($id)) {
+            return redirect()->route('client.index');
+        }
+        if (!$client->hasPermission('client')) {
+            return redirect()->route('client.index')->with('error', 'Você so podê editar Clientes.');
+        }
+
+        $location = $client->address()->first();
+        $client->formatted_date_of_birth = $this->formattedDate($client->date_of_birth);
+        // dd($location);
+
+        return view('client.edit', compact('client', 'location'));
+    }
+
+    public function update(StoreUpdateUserFormRequest $request, $id)
+    {
+        $client = $request->only('name', 'email', 'date_of_birth', 'cpf');
+        $location = $request->only('street', 'number', 'complement', 'neighborhood', 'cep', 'city', 'state');
+
+        if (!$user = $this->user->find($id)) {
+            return redirect()->route('client.index');
+        }
+        if (!$user->hasPermission('client')) {
+            return redirect()->route('client.index')->with('error', 'Você so podê editar Clientes.');
+        }
+        if ($request->password) {
+            $client['password'] = bcrypt($request->password);
+        }
+        if ($request->avatar) {
+            if ($user->avatar) {
+                Storage::delete($user->avatar);
+            }
+            $extension = $request->avatar->getClientOriginalExtension();
+            $client['avatar'] = $request->avatar->storeAs('usersAvatar', "{$client['name']}_" . now() . ".{$extension}");
+        }
+
+        $user->update($client);
+        $user->assignAddress($location, $user->id);
 
         return redirect()->route('client.index');
     }
@@ -61,6 +124,9 @@ class ClientController extends Controller
     public function delete($id)
     {
         if ($client = $this->user->find($id)) {
+            if (!$client->hasPermission('client')) {
+                return redirect()->route('client.index')->with('error', 'Você só podê excluir Clientes.');
+            }
             if ($client->avatar) {
                 Storage::delete($client->avatar);
             }
@@ -70,15 +136,25 @@ class ClientController extends Controller
         return redirect()->route('client.index');
     }
 
-    // Funcao de Formatação
+    // Funcao de Formatação e Validação
 
-    private function formatedDate($date)
+    private function formattedDate($date)
     {
         return Carbon::parse($date)->format('d/m/Y');
     }
 
-    private function formatedTimestamp($date)
+    private function formattedTimestamp($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y');
+    }
+
+    private function formattedCPF($cpf)
+    {
+        return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+    }
+
+    private function formattedCEP($cep)
+    {
+        return substr($cep, 0, 5) . '-' . substr($cep, 5, 3);
     }
 }

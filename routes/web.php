@@ -27,6 +27,9 @@ Route::prefix('/clients')->middleware(['auth', 'can:manager'])->group(function (
     Route::get('/', [ClientController::class, 'index'])->name('client.index');
     Route::post('/', [ClientController::class, 'store'])->name('client.store');
     Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+    Route::get('/{id}/profile', [ClientController::class, 'show'])->name('client.show');
+    Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
+    Route::put('/{id}', [ClientController::class, 'update'])->name('client.update');
     Route::delete('/{id}', [ClientController::class, 'delete'])->name('client.delete');
 });
 

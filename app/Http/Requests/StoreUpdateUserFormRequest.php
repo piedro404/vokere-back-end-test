@@ -108,6 +108,15 @@ class StoreUpdateUserFormRequest extends FormRequest
             ],
         ];
 
+        // Validate for Update
+        if ($this->method() === "PUT") {
+            $rules['password'] = [
+                'nullable',
+                'min:5',
+                'max:255',
+            ];
+        }
+
         return $rules;
     }
 }
