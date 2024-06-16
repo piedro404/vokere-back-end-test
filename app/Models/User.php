@@ -82,11 +82,18 @@ class User extends Authenticatable
 
     // Funções do Controllers
 
-    public function getUsersClients()
+    public function getUsersClients($name, $created_at)
     {
         $clients = $this::whereHas('permissions', function ($query) {
             $query->where('name', 'client');
-        })->get();
+        })->where(function ($query) use ($name, $created_at) {
+            if ($name) {
+                $query->where('name', 'LIKE', "%{$name}%");
+            }
+            if ($created_at) {
+                $query->where('created_at', ">=", "{$created_at} 00:00:00", "AND", 'created_at', "<=", "{$created_at} 23:59:59");
+            }
+        })->simplePaginate(10);
 
         return $clients;
     }

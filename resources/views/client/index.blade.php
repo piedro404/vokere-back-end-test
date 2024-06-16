@@ -14,19 +14,25 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col gap-3">
                 <div class="relative">
-                    <label for="Search" class="sr-only">Search</label>
-                    <input type="text" id="Search" placeholder="Pesquisar por nome ou data..."
-                        class="w-full rounded-md py-2.5 pe-10 sm:text-sm" />
-                    <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-                        <button type="button" class="text-gray-600 hover:text-gray-700">
-                            <span class="sr-only">Search</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                            </svg>
-                        </button>
-                    </span>
+                    <form action="{{ route('client.index') }}" method="get">
+                        <div class="flex flex-row w-full">
+                            <input type="text" name="name" id="name" placeholder="Pesquisar por nome..."
+                                class="w-2/3 rounded-md py-2.5 pe-10 sm:text-sm" />
+                            <input type="text" name="created_at" id="created_at"
+                                placeholder="Pesquisar por data de criação..."
+                                class="w-1/3 rounded-md py-2.5 pe-10 sm:text-sm" />
+                        </div>
+                        <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
+                            <button class="text-gray-600 hover:text-gray-700">
+                                <span class="sr-only">Search</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                            </button>
+                        </span>
+                    </form>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -83,6 +89,9 @@
                             </tbody>
                         @endif
                     </table>
+                    <div class="w-full px-4 pt-6">
+                        {{ $clients->appends(request()->only('name', 'created_at'))->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -182,5 +191,12 @@
                 });
             }
         };
+    </script>
+
+    <script type="module" defer>
+        // Masks com InputMask
+        document.addEventListener("DOMContentLoaded", function() {
+            Inputmask("99/99/9999").mask(document.getElementById('created_at'));
+        });
     </script>
 </x-app-layout>

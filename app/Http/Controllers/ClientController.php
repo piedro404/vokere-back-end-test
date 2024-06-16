@@ -19,15 +19,25 @@ class ClientController extends Controller
         $this->address = $address;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $clients = $this->user->getUsersClients();
+        $name = $request->name ?? "";
+        $created_at = "";
 
+        if(isset($request->created_at))
+        {
+            $created_at = Carbon::createFromFormat('d/m/Y', $request->created_at)->format('Y-m-d');
+        }
+
+        $clients = $this->user->getUsersClients($name, $created_at);
+        
         $clients->transform(function ($client) {
             $client->formatted_date_of_birth = $this->formattedDate($client->date_of_birth);
             $client->formatted_created_at = $this->formattedTimestamp($client->created_at);
             return $client;
         });
+        // dd($name, $created_at);
+        // dd($clients);
 
         return view('client.index', compact('clients'));
     }
@@ -45,6 +55,7 @@ class ClientController extends Controller
         $client->formatted_date_of_birth = $this->formattedDate($client->date_of_birth);
         $client->formatted_created_at = $this->formattedTimestamp($client->created_at);
         $client->formatted_cpf = $this->formattedCPF($client->cpf);
+        
         if($location){
             $location->formatted_cep = $this->formattedCEP($location->cep);
         }
