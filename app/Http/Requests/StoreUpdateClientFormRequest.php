@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidateCpf;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -54,7 +55,8 @@ class StoreUpdateClientFormRequest extends FormRequest
                 'required',
                 'min:11',
                 'max:11',
-                "unique:users,cpf,{$id},id"
+                "unique:users,cpf,{$id},id",
+                new ValidateCpf(),
             ],
             'date_of_birth' => [
                 'required',
