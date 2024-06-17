@@ -32,7 +32,17 @@ Seja bem-vindo(a) ao desafio de desenvolvimento Back-end da VOKERÊ. Estamos em 
    npm i
    ```
 
-3. Execulte o Projeto
+3. Estruture e Semei o Banco de Dados
+   
+```bash
+   php artisan migrate:fresh
+   ```
+
+```bash
+   php artisan db:seed
+   ```
+
+4. Execulte o Projeto
    
 ```bash
    npm run dev
