@@ -10,9 +10,41 @@
                 <div class="p-6 text-gray-900">
                     <h1 class="text-lg">Meus Materias de Estudo/Projeto: </h1>
                 </div>
-                <div class="px-6 text-gray-900">
-                    <h1 class="text-sl">Modelo ER do Banco de Dados - Feito no BrModelo</h1>
-                    <img src="{{ url('images/sys_ER.png') }}" alt="Modelo Feito no BRmodelo sobre a Base de dados do Teste">
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Orientações do Teste</h1>
+                    <img src="{{ url('images/welcomeImages/testevokere.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Ambiente Linux para Trabalhar com Laravel - Valet</h1>
+                    <img src="{{ url('images/welcomeImages/ambiente.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Aprendendo sobre Laravel na versão 9.x para entender a Estrutura do Framework</h1>
+                    <img src="{{ url('images/welcomeImages/curso.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Blog comentando sobre Niveis de Acesso com Breeze</h1>
+                    <img src="{{ url('images/welcomeImages/blog.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Documentação do Laravel</h1>
+                    <img src="{{ url('images/welcomeImages/laravel.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Documentação do TailwindCSS</h1>
+                    <img src="{{ url('images/welcomeImages/tailwind.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Modelo Lógico do Banco de Dados do Projeto - Feito no BrModelo</h1>
+                    <img src="{{ url('images/welcomeImages/sys_ER.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Componentes para UI - TailwindCSS</h1>
+                    <img src="{{ url('images/welcomeImages/components.png') }}" alt="">
+                </div>
+                <div class="flex flex-col p-6 text-gray-900 gap-2">
+                    <h1 class="text-sl">Gerar CPF Validos</h1>
+                    <img src="{{ url('images/welcomeImages/geradorcpf.png') }}" alt="">
                 </div>
             </div>
         </div>
