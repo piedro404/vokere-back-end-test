@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\{AuthController, ClientController, ProfileController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +20,26 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::prefix('/clients')->middleware(['auth', 'can:manager'])->group(function () {
+    Route::get('/', [ClientController::class, 'index'])->name('client.index');
+    Route::post('/', [ClientController::class, 'store'])->name('client.store');
+    Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+    Route::get('/{id}/profile', [ClientController::class, 'show'])->name('client.show');
+    Route::get('/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
+    Route::put('/{id}', [ClientController::class, 'update'])->name('client.update');
+    Route::delete('/{id}', [ClientController::class, 'delete'])->name('client.delete');
+});
+
+Route::prefix('/profile')->middleware('auth')->group(function () {
+    Route::get('/', [AuthController::class, 'index'])->name('auth.index');
+    Route::get('/edit', [AuthController::class, 'edit'])->name('auth.edit');
+    Route::patch('/edit', [AuthController::class, 'update'])->name('auth.update');
+});
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
