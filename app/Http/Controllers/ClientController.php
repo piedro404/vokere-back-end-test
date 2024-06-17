@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUpdateUserFormRequest;
+use App\Http\Requests\StoreUpdateClientFormRequest;
 use App\Models\{Address, User};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -69,7 +69,7 @@ class ClientController extends Controller
         return view('client.create');
     }
 
-    public function store(StoreUpdateUserFormRequest $request)
+    public function store(StoreUpdateClientFormRequest $request)
     {
         $client = $request->only('name', 'email', 'date_of_birth', 'cpf');
         $location = $request->only('street', 'number', 'complement', 'neighborhood', 'cep', 'city', 'state');
@@ -106,7 +106,7 @@ class ClientController extends Controller
         return view('client.edit', compact('client', 'location'));
     }
 
-    public function update(StoreUpdateUserFormRequest $request, $id)
+    public function update(StoreUpdateClientFormRequest $request, $id)
     {
         $client = $request->only('name', 'email', 'date_of_birth', 'cpf');
         $location = $request->only('street', 'number', 'complement', 'neighborhood', 'cep', 'city', 'state');

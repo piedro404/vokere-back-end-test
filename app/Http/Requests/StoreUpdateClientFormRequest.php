@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreUpdateUserFormRequest extends FormRequest
+class StoreUpdateClientFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +22,7 @@ class StoreUpdateUserFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = Auth::user()->id;
+        $id = $this->id ?? '';
         
         $this->merge([
             'cpf' => preg_replace('/[\.\-_]/', '', $this->cpf),
@@ -45,6 +44,11 @@ class StoreUpdateUserFormRequest extends FormRequest
                 'required',
                 'email',
                 "unique:users,email,{$id},id",
+            ],
+            'password' => [
+                'required',
+                'min:5',
+                'max:255',
             ],
             'cpf' => [
                 'required',
@@ -104,6 +108,15 @@ class StoreUpdateUserFormRequest extends FormRequest
                 'max:8', 
             ],
         ];
+
+        // Validate for Update
+        if ($this->method() === "PUT") {
+            $rules['password'] = [
+                'nullable',
+                'min:5',
+                'max:255',
+            ];
+        }
 
         return $rules;
     }
