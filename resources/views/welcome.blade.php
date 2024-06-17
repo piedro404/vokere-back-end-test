@@ -40,6 +40,34 @@
                     </div>
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
+                            <h1 class="text-lg">Acessos ao App: </h1>
+                            <h1 class="text-lg">Perfils de Admin: </h1>
+                            <div class="flex flex-col gap-3 py-2">
+                                <h1 class="text-lg"><span
+                                        class="bg-gray-600 px-3 py-2 rounded text-white font-bold">admin@gmail.com</span>
+                                    <span class="bg-gray-600 px-3 py-2 rounded text-white font-bold">admin</span>
+                                </h1>
+                                <h1 class="text-lg"><span
+                                        class="bg-gray-600 px-3 py-2 rounded text-white font-bold">vokere@gmail.com</span>
+                                    <span class="bg-gray-600 px-3 py-2 rounded text-white font-bold">admin</span>
+                                </h1>
+                            </div>
+                            <h1 class="text-lg">Perfil de Manager: </h1>
+                            <div class="flex flex-col gap-3 py-2">
+                                <h1 class="text-lg"><span
+                                        class="bg-gray-600 px-3 py-2 rounded text-white font-bold">hedleydarsh@gmail.com</span>
+                                    <span class="bg-gray-600 px-3 py-2 rounded text-white font-bold">admin</span>
+                                </h1>
+                            </div>
+                            <h1 class="text-lg">Perfil de Client - Exemplo: </h1>
+                            <div class="flex flex-col gap-3 py-2">
+                                <h1 class="text-lg"><span
+                                        class="bg-gray-600 px-3 py-2 rounded text-white font-bold">pedroplayborges@gmail.com</span>
+                                    <span class="bg-gray-600 px-3 py-2 rounded text-white font-bold">123456</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="p-6 text-gray-900">
                             <h1 class="text-lg">Apresentação: </h1>
                         </div>
                         <div class="px-6 text-gray-900">
@@ -70,13 +98,6 @@
                                     alt="Foto do Linkedin" class="flex content-center my-6 h-60 w-60">
                                 <img src="https://camo.githubusercontent.com/87722c2c8c1c585c3b0254feca17e5545ed9728f9cc891578e6600fd7fa5a807/68747470733a2f2f692e6962622e636f2f673731637253312f6e696b6f2d6f6e6573686f742e676966"
                                     alt="Foto do Linkedin" class="flex content-center my-6 h-60 w-60">
-                            </div>
-                            <div class="p-6 text-gray-900">
-                                <h1 class="text-lg">Login Admin: <span
-                                        class="bg-gray-600 px-3 py-2 rounded text-white font-bold">pedroplayborges@gmail.com</span>
-                                    <span
-                                        class="bg-gray-600 px-3 py-2 rounded text-white font-bold">admin</span>
-                                </h1>
                             </div>
                             <div class="flex flex-row justify-around pb-6">
                                 <a href="https://github.com/piedro404" target="_blank"
