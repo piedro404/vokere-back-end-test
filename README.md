@@ -13,6 +13,30 @@ Seja bem-vindo(a) ao desafio de desenvolvimento Back-end da VOKERÊ. Estamos em 
 ![Screenshot from 2024-06-17 00-47-36](https://github.com/piedro404/vokere-back-end-test/assets/88720549/aaca6b6e-abc3-4d4c-aa3d-68fc9e453f17)
 
 ![Screenshot from 2024-06-17 00-47-46](https://github.com/piedro404/vokere-back-end-test/assets/88720549/4d528285-dc4a-4ee9-b1e3-ff5f55299fb4)
+
+# Instalação 📱
+
+1. Clone este repositório:
+   
+```bash
+   git clone https://github.com/piedro404/vokere-back-end-test.git
+   ```
+   
+2. Instale as Dependecias
+   
+```bash
+   composer install
+   ```
+
+```bash
+   npm i
+   ```
+
+3. Execulte o Projeto
+   
+```bash
+   npm run dev
+   ```
     
 ## Tarefa: 📋
 
