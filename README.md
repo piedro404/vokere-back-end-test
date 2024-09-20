@@ -103,11 +103,5 @@ Desenvolva um sistema de gerenciamento de clientes com as seguintes funcionalida
 2. **Commits**: Realize commits separados para possibilitar o acompanhamento da evolução do projeto.
 3. **Dump do Banco de Dados**: Inclua um dump do banco de dados, populado e com estrutura de criação de tabelas, índices, e relacionamentos (`BANCODEDADOS.sql`).
 
-## Observações: 📌
-
-Envie o teste finalizado para o email hedley.ti@gmail.com ou adicione o usuário `hedleydarsh` ao repositório.
-
-Estamos ansiosos para ver o seu trabalho e desejamos boa sorte neste desafio!
-
 Atenciosamente,  
 VOKERÊ Equipe de Recrutamento
